@@ -1,0 +1,8 @@
+<launch>
+  <node pkg="lidar_camera_calibration" type="camera_calibration_node" name="camera_calibration_node" output="screen">
+    <param name="file_path" type="str" value="$(find lidar_camera_calibration)/data/" />
+    <param name="pattern_width" type="int" value="6" />
+    <param name="pattern_height" type="int" value="4" />
+    <param name="square_size" type="int" value="10" />
+  </node>
+</launch>

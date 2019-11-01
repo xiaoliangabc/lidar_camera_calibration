@@ -49,7 +49,7 @@ void DataGenerateNode::ClickCallback(
   if (image_.empty()) {
     ROS_ERROR("[DataGenerateNode::ClickCallback] empty image");
   } else {
-    std::string image_file = file_path_ + "image/" + file_name.str() + ".png";
+    std::string image_file = file_path_ + "image/" + file_name.str() + ".jpg";
     cv::imwrite(image_file, image_);
     ROS_INFO("[DataGenerateNode::ClickCallback] save image to %s",
              image_file.c_str());

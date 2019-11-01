@@ -5,8 +5,7 @@ DataGenerateNode::DataGenerateNode() : nh_("~") {
   nh_.param<std::string>("image_topic", image_topic_, "");
   nh_.param<std::string>("click_topic", click_topic_, "");
   nh_.param<std::string>("file_path", file_path_, "");
-
-  file_num_ = 0;
+  nh_.param<int>("file_num", file_num_, 0);
 
   sub_cloud_ = nh_.subscribe(cloud_topic_, 2,
                              &DataGenerateNode::PointCloudCallback, this);
@@ -25,8 +24,9 @@ void DataGenerateNode::PointCloudCallback(
 
 // receive image
 void DataGenerateNode::ImageCallback(
-    const sensor_msgs::CompressedImageConstPtr& image_in) {
-  image_ = cv::imdecode(cv::Mat(image_in->data), CV_LOAD_IMAGE_UNCHANGED);
+    const sensor_msgs::ImageConstPtr& image_in) {
+  // image_ = cv::imdecode(cv::Mat(image_in->data), CV_LOAD_IMAGE_UNCHANGED);
+  image_= cv_bridge::toCvShare(image_in, "8UC3")->image;
 }
 
 void DataGenerateNode::ClickCallback(

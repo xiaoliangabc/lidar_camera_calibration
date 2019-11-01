@@ -1,9 +1,10 @@
 <launch>
   <node pkg="lidar_camera_calibration" type="data_generate_node" name="data_generate_node" output="screen">
-    <param name="cloud_topic" type="str" value="/pandar_points" />
-    <param name="image_topic" type="str" value="/axis/image_rect_color/compressed" />
+    <param name="cloud_topic" type="str" value="/pandar40p" />
+    <param name="image_topic" type="str" value="/axis/image_color" />
     <param name="click_topic" type="str" value="/clicked_point" />
     <param name="file_path" type="str" value="$(find lidar_camera_calibration)/data/" />
+    <param name="file_num" type="int" value="0" />
   </node>
   <node pkg="rviz" name="rviz" type="rviz" args="-d $(find lidar_camera_calibration)/.config/rviz/data_generate.rviz" />
 </launch>

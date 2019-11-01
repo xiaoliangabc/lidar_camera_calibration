@@ -23,7 +23,7 @@ class DataGenerateNode {
   void PointCloudCallback(const sensor_msgs::PointCloud2ConstPtr& cloud_in);
 
   // receive image
-  void ImageCallback(const sensor_msgs::CompressedImageConstPtr& image_in);
+  void ImageCallback(const sensor_msgs::ImageConstPtr& image_in);
 
   // receive click signal
   void ClickCallback(const geometry_msgs::PointStampedConstPtr& click_in);

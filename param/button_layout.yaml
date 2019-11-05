@@ -1,0 +1,4 @@
+- name: 'Prev'
+- name: 'Next'
+- name: 'Save'
+- name: 'Delete'

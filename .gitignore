@@ -2,3 +2,7 @@
 *.pcd
 *.png
 *.jpg
+*.xyz
+*.mat
+*.m
+*.txt

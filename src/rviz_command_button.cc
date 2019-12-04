@@ -30,7 +30,8 @@ CommandButton::CommandButton(QWidget* parent) : rviz::Panel(parent) {
   setLayout(layout);
 
   // Publisher
-  command_publisher_ = nh_.advertise<std_msgs::String>("/button_command", 1);
+  command_publisher_ = nh_.advertise<std_msgs::String>(
+      "lidar_camera_calibration/button_command", 1);
 }
 
 void CommandButton::ButtonResponse(QString command) {

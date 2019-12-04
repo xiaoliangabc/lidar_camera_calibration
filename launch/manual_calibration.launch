@@ -1,10 +1,9 @@
 <launch>
   <node pkg="lidar_camera_calibration" type="manual_calibration_node" name="manual_calibration_node" output="screen">
-    <rosparam command="load" file="$(find lidar_camera_calibration)/param/camera_parameters.yaml" />
     <param name="in_cloud_topic" type="str" value="/pandar40p" />
-    <param name="in_image_topic" type="str" value="/axis/image_color/compressed" />
-    <param name="out_image_topic" type="str" value="/projected_image" />
-    <param name="out_cloud_topic" type="str" value="/pandar40p/front" />
+    <param name="in_image_topic" type="str" value="/camera/image_color/compressed" />
+    <param name="out_image_topic" type="str" value="/lidar_camera_calibration/projected_image" />
+    <param name="out_cloud_topic" type="str" value="/lidar_camera_calibration/in_image_cloud" />
     <param name="calibration_file" type="str" value="$(find lidar_camera_calibration)/param/calibration.yaml" />
     <param name="min_theta" type="double" value="240.0" />
     <param name="max_theta" type="double" value="300.0" />

@@ -83,7 +83,7 @@ void ManualCalibrationNode::ImageCallback(
 }
 
 void ManualCalibrationNode::ConfigCallback(
-    lidar_camera_calibration::transformationConfig& config, uint32_t level) {
+    lidar_camera_calibration::ManualCalibrationConfig& config, uint32_t level) {
   // get transform parameters
   rotation_vector_ =
       (cv::Mat_<double>(3, 1) << config.roll, config.pitch, config.yaw);
@@ -160,7 +160,7 @@ void ManualCalibrationNode::Project(
           cv::Scalar(static_cast<int>(range / max_range_ * 255), 255, 255));
     }
   }
-  
+
   // transform back image form HSV space to RGB space
   cv::cvtColor(hsv_image, in_image, cv::COLOR_HSV2BGR);
 }

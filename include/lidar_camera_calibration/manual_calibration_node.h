@@ -12,7 +12,7 @@
 #include "opencv2/calib3d/calib3d.hpp"
 
 #include <dynamic_reconfigure/server.h>
-#include <lidar_camera_calibration/transformationConfig.h>
+#include <lidar_camera_calibration/ManualCalibrationConfig.h>
 
 class ManualCalibrationNode {
  public:
@@ -27,7 +27,7 @@ class ManualCalibrationNode {
   void ImageCallback(const sensor_msgs::CompressedImageConstPtr& image_in);
 
   // get dynamic parameters
-  void ConfigCallback(lidar_camera_calibration::transformationConfig& config,
+  void ConfigCallback(lidar_camera_calibration::ManualCalibrationConfig& config,
                       uint32_t level);
 
  private:
@@ -48,10 +48,10 @@ class ManualCalibrationNode {
   std::string out_cloud_topic_;
 
   // server parameters
-  dynamic_reconfigure::Server<lidar_camera_calibration::transformationConfig>
+  dynamic_reconfigure::Server<lidar_camera_calibration::ManualCalibrationConfig>
       dr_srv_;
   dynamic_reconfigure::Server<
-      lidar_camera_calibration::transformationConfig>::CallbackType dr_cb_;
+      lidar_camera_calibration::ManualCalibrationConfig>::CallbackType dr_cb_;
 
   // cloud
   pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_;

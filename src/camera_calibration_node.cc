@@ -139,6 +139,7 @@ std::vector<std::string> CameraCalibrationNode::get_files(std::string path) {
               path.c_str());
     exit(EXIT_FAILURE);
   }
+  std::sort(files.begin(), files.end());
 
   return files;
 }

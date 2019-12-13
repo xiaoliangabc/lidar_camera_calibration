@@ -1,5 +1,5 @@
-#ifndef LIDAR_CAMERA_CALIBRATION_DATA_GENERATE_NODE_H_
-#define LIDAR_CAMERA_CALIBRATION_DATA_GENERATE_NODE_H_
+#ifndef LIDAR_CAMERA_CALIBRATION_DATA_GENERATE_H_
+#define LIDAR_CAMERA_CALIBRATION_DATA_GENERATE_H_
 
 #include <ros/ros.h>
 
@@ -13,45 +13,46 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-#include <geometry_msgs/PointStamped.h>
+#include <std_msgs/String.h>
 
-class DataGenerateNode {
+class DataGenerate {
  public:
-  DataGenerateNode();
+  DataGenerate(ros::NodeHandle nh, ros::NodeHandle pnh);
 
-  // receive point cloud
+  // Receive point cloud
   void PointCloudCallback(const sensor_msgs::PointCloud2ConstPtr& cloud_in);
 
-  // receive image
+  // Receive image
   void ImageCallback(const sensor_msgs::ImageConstPtr& image_in);
 
-  // receive click signal
-  void ClickCallback(const geometry_msgs::PointStampedConstPtr& click_in);
+  // Receive button command
+  void ButtonCommandCallback(const std_msgs::String::ConstPtr& in_command);
 
  private:
   ros::NodeHandle nh_;
+  ros::NodeHandle pnh_;
 
-  // subscriber
+  // Subscriber
   ros::Subscriber sub_cloud_;
   ros::Subscriber sub_image_;
-  ros::Subscriber sub_click_;
+  ros::Subscriber sub_button_command_;
 
-  // topic name
+  // Topic names
   std::string cloud_topic_;
   std::string image_topic_;
-  std::string click_topic_;
+  std::string button_command_topic_;
 
-  // cloud
+  // Cloud
   pcl::PointCloud<pcl::PointXYZI> cloud_;
 
-  // image
+  // Image
   cv::Mat image_;
 
-  // file numbers
-  int file_num_;
+  // Starting file numbers
+  int starting_file_num_;
 
-  // file path
-  std::string file_path_;
+  // Data path to save cloud and image
+  std::string data_path_;
 };
 
 #endif  // LIDAR_CAMERA_CALIBRATION_DATA_GENERATE_NODE_H_

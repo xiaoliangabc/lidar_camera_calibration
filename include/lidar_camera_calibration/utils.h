@@ -111,7 +111,6 @@ inline cv::Mat ProjectCloudToImage(
     const Eigen::Matrix3d &intrinsic_matrix,
     const Eigen::VectorXd &distortion_coeffs, const float &min_range,
     const float &max_range) {
-  double start_time = ros::Time::now().toSec();
   // Assert data
   if (in_cloud->empty() || in_image.empty()) {
     ROS_ERROR("[ProjectCloudToImage]: Empty cloud or image");

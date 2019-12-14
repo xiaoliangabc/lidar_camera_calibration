@@ -1,6 +1,6 @@
 //
 // MATLAB Compiler: 7.0.1 (R2019a)
-// Date: Sat Dec 14 10:20:50 2019
+// Date: Sat Dec 14 20:21:30 2019
 // Arguments:
 // "-B""macro_default""-W""cpplib:libCameraCalibration""-T""link:lib""camera_cal
 // ibration.m"
@@ -83,7 +83,7 @@ bool MW_CALL_CONV mlxCamera_calibration(int nlhs, mxArray *plhs[], int nrhs, mxA
 
 #endif
 
-extern LIB_libCameraCalibration_CPP_API void MW_CALL_CONV camera_calibration(const mwArray& imagePath, const mwArray& resultPath);
+extern LIB_libCameraCalibration_CPP_API void MW_CALL_CONV camera_calibration(const mwArray& imagePath, const mwArray& resultPath, const mwArray& squareSize);
 
 /* C++ INTERFACE -- WRAPPERS FOR USER-DEFINED MATLAB FUNCTIONS -- END */
 #endif

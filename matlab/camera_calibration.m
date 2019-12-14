@@ -1,4 +1,4 @@
-function camera_calibration(imagePath, resultPath)
+function camera_calibration(imagePath, resultPath, squareSize)
     % Define images to process
     imageFiles  = dir(fullfile(imagePath, '*.jpg'));
     imageFileNames = fullfile(imagePath, {imageFiles.name});
@@ -14,7 +14,6 @@ function camera_calibration(imagePath, resultPath)
     [mrows, ncols, ~] = size(originalImage);
 
     % Generate world coordinates of the corners of the squares
-    squareSize = 100;  % in units of 'millimeters'
     worldPoints = generateCheckerboardPoints(boardSize, squareSize);
     disp('Generate checkerboard points finish!');
 

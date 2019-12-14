@@ -10,6 +10,8 @@ int main(int argc, char **argv) {
   // Get data path
   std::string data_path;
   pnh.param<std::string>("common/data_path", data_path, "");
+  int square_size;
+  pnh.param<int>("common/square_size", square_size, 100);
 
   // Initialize the MATLAB Compiler Runtime global state
   ROS_INFO("Start initialize the MATLAB  Compiler Runtime global state.");
@@ -31,13 +33,15 @@ int main(int argc, char **argv) {
   ROS_INFO("Start camera calibration.");
   mwArray image_path((data_path + "image/").c_str());
   mwArray result_path((data_path + "result/").c_str());
-  camera_calibration(image_path, result_path);
+  mwArray square_size_mw(square_size);
+  camera_calibration(image_path, result_path, square_size_mw);
   ROS_INFO("Finish camera calibration.");
 
   // Shut down the library and the application global state.
   libCameraCalibrationTerminate();
   mclTerminateApplication();
-  ROS_INFO("Shut down the library and the application global state, exiting...");
+  ROS_INFO(
+      "Shut down the library and the application global state, exiting...");
 
   return 0;
 }

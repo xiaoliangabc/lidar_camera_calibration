@@ -5,6 +5,7 @@ common:
   image_topic: "/camera/image_color"
   button_command_topic: "/lidar_camera_calibration/button_command"
   data_path: "/home/wxl/catkin_ws/src/lidar_camera_calibration/data/"
+  square_size: 100  # in units of 'millimeters'
   lidar_chessboard_points_number: 100
   min_angle: 240.0
   max_angle: 300.0

@@ -9,8 +9,8 @@
     <param name="frame_id" type="str" value="pandar" />
     <param name="min_height" type="double" value="-1.7" />
     <param name="max_height" type="double" value="1.0" />
-    <param name="min_theta" type="double" value="240.0" />
-    <param name="max_theta" type="double" value="300.0" />
+    <param name="min_angle" type="double" value="240.0" />
+    <param name="max_angle" type="double" value="300.0" />
     <param name="min_range" type="double" value="2.0" />
     <param name="max_range" type="double" value="5.0" />
     <param name="max_iterations" type="int" value="100" />

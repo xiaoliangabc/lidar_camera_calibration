@@ -76,8 +76,8 @@ class LidarChessboardDetector {
   // Clip cloud params
   double min_height_;
   double max_height_;
-  double min_theta_;
-  double max_theta_;
+  double min_angle_;
+  double max_angle_;
   double min_range_;
   double max_range_;
 

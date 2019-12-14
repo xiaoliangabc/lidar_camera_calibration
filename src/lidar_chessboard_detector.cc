@@ -12,8 +12,8 @@ LidarChessboardDetector::LidarChessboardDetector(ros::NodeHandle nh,
   pnh_.param<std::string>("data_path", data_path_, "");
   pnh_.param<double>("min_height", min_height_, 0.0);
   pnh_.param<double>("max_height", max_height_, 0.0);
-  pnh_.param<double>("min_theta", min_theta_, 0.0);
-  pnh_.param<double>("max_theta", max_theta_, 00.0);
+  pnh_.param<double>("min_angle", min_angle_, 0.0);
+  pnh_.param<double>("max_angle", max_angle_, 0.0);
   pnh_.param<double>("min_range", min_range_, 0.0);
   pnh_.param<double>("max_range", max_range_, 0.0);
   pnh_.param<int>("max_iterations", max_iterations_, 0);
@@ -56,7 +56,7 @@ LidarChessboardDetector::LidarChessboardDetector(ros::NodeHandle nh,
 void LidarChessboardDetector::Run() {
   // Get all cloud files in given directory
   std::vector<std::string> raw_cloud_files =
-      lidar_camera_calibration::get_files(data_path_ + "cloud");
+      GetFilesInfolder(data_path_ + "cloud");
 
   // Chessborad plane model coefficients file
   std::ofstream chessboard_model_file(data_path_ +
@@ -99,7 +99,7 @@ void LidarChessboardDetector::Run() {
         raw_cloud_files[i].substr(0, raw_cloud_files[i].size() - 4);
     SaveChessboardmodel(index, chessboard_model_file);
     SaveChessboardPoints(index, chessboard_points_file);
-    ROS_INFO("[Run] Save result file");
+    ROS_INFO("[Run] Save result to file");
   }
 }
 
@@ -114,8 +114,8 @@ void LidarChessboardDetector::DynamicrReconfigureCallback(
   // Get transform parameters
   min_height_ = config.min_height;
   max_height_ = config.max_height;
-  min_theta_ = config.min_theta;
-  max_theta_ = config.max_theta;
+  min_angle_ = config.min_angle;
+  max_angle_ = config.max_angle;
   min_range_ = config.min_range;
   max_range_ = config.max_range;
   max_iterations_ = config.max_iterations;
@@ -189,9 +189,9 @@ void LidarChessboardDetector::RemoveOutlier(
     float range = sqrt(pt.x * pt.x + pt.y * pt.y);
     if (range < min_range_ || range > max_range_) continue;
     // Remove points out of camera view
-    float theta = atan2(pt.y, pt.x) * 180 / M_PI;
-    if (theta < 0) theta += 360;
-    if (theta < min_theta_ || theta > max_theta_) continue;
+    float angle = atan2(pt.y, pt.x) * 180 / M_PI;
+    if (angle < 0) angle += 360;
+    if (angle < min_angle_ || angle > max_angle_) continue;
     out_cloud->points.push_back(pt);
   }
 }
@@ -264,6 +264,7 @@ void LidarChessboardDetector::SaveChessboardmodel(const std::string &index,
        << chessboard_coefficients_->values[2] << ","
        << chessboard_coefficients_->values[3] << std::endl;
 }
+
 void LidarChessboardDetector::SaveChessboardPoints(const std::string &index,
                                                    std::ofstream &file) {
   // Random sample for chessboard cloud
@@ -273,6 +274,14 @@ void LidarChessboardDetector::SaveChessboardPoints(const std::string &index,
   random_sample.setInputCloud(chessboard_cloud_);
   random_sample.setSample(chessboard_points_number_);
   random_sample.filter(*sample_cloud);
+
+  if (sample_cloud->points.size() != chessboard_points_number_) {
+    ROS_ERROR(
+        "[SaveChessboardPoints] Chessboard points size is %ld not equal to "
+        "requared size %d",
+        sample_cloud->points.size(), chessboard_points_number_);
+    ros::shutdown();
+  }
 
   // Save sample points to file
   for (const auto pt : sample_cloud->points) {

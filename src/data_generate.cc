@@ -2,11 +2,12 @@
 
 DataGenerate::DataGenerate(ros::NodeHandle nh, ros::NodeHandle pnh)
     : nh_(nh), pnh_(pnh) {
-  pnh_.param<std::string>("cloud_topic", cloud_topic_, "");
-  pnh_.param<std::string>("image_topic", image_topic_, "");
-  pnh_.param<std::string>("button_command_topic", button_command_topic_, "");
-  pnh_.param<std::string>("data_path", data_path_, "");
-  pnh_.param<int>("starting_file_num", starting_file_num_, 0);
+  pnh_.param<std::string>("common/point_cloud_topic", cloud_topic_, "");
+  pnh_.param<std::string>("common/image_topic", image_topic_, "");
+  pnh_.param<std::string>("common/button_command_topic", button_command_topic_,
+                          "");
+  pnh_.param<std::string>("common/data_path", data_path_, "");
+  pnh_.param<int>("data_generate/starting_file_num", starting_file_num_, 0);
 
   sub_cloud_ =
       nh_.subscribe(cloud_topic_, 2, &DataGenerate::PointCloudCallback, this);

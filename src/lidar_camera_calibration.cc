@@ -3,13 +3,13 @@
 LidarCameraCalibration::LidarCameraCalibration(ros::NodeHandle nh,
                                                ros::NodeHandle pnh)
     : nh_(nh), pnh_(pnh) {
-  pnh_.param<std::string>("data_path", data_path_, "");
-  pnh_.param<int>("lidar_chessboard_points_number",
+  pnh_.param<std::string>("common/data_path", data_path_, "");
+  pnh_.param<int>("common/lidar_chessboard_points_number",
                   lidar_chessboard_points_number_, 0);
-  pnh_.param<double>("min_angle", min_angle_, 0.0);
-  pnh_.param<double>("max_angle", max_angle_, 0.0);
-  pnh_.param<double>("min_range", min_range_, 0.0);
-  pnh_.param<double>("max_range", max_range_, 0.0);
+  pnh_.param<double>("common/min_angle", min_angle_, 0.0);
+  pnh_.param<double>("common/max_angle", max_angle_, 0.0);
+  pnh_.param<double>("common/min_range", min_range_, 0.0);
+  pnh_.param<double>("common/max_range", max_range_, 0.0);
 }
 
 void LidarCameraCalibration::Calibration() {
@@ -237,6 +237,7 @@ void LidarCameraCalibration::DisplayCalibrationResult(
   cv::namedWindow("lidar_camera_calibration", CV_WINDOW_NORMAL);
   cv::imshow("lidar_camera_calibration", camera_image_projected);
   cv::waitKey(0);
+  cv::destroyWindow("lidar_camera_calibration");
 }
 
 void LidarCameraCalibration::ReadCameraparams(

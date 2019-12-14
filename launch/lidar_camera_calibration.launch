@@ -1,10 +1,5 @@
 <launch>
   <node pkg="lidar_camera_calibration" type="lidar_camera_calibration_node" name="lidar_camera_calibration_node" output="screen">
-    <param name="data_path" type="str" value="$(find lidar_camera_calibration)/data/" />
-    <param name="lidar_chessboard_points_number" type="int" value="100" />
-    <param name="min_angle" type="double" value="240.0" />
-    <param name="max_angle" type="double" value="300.0" />
-    <param name="min_range" type="double" value="2.0" />
-    <param name="max_range" type="double" value="100.0" />
+    <rosparam command="load" file="$(find lidar_camera_calibration)/param/parameters.yaml" />
   </node>
 </launch>

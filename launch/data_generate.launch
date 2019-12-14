@@ -1,10 +1,6 @@
 <launch>
   <node pkg="lidar_camera_calibration" type="data_generate" name="data_generate" output="screen">
-    <param name="cloud_topic" type="str" value="/driver/pandar/point_cloud" />
-    <param name="image_topic" type="str" value="/camera/image_color" />
-    <param name="button_command_topic" type="str" value="/lidar_camera_calibration/button_command" />
-    <param name="data_path" type="str" value="$(find lidar_camera_calibration)/data/" />
-    <param name="starting_file_num" type="int" value="0" />
+    <rosparam command="load" file="$(find lidar_camera_calibration)/param/parameters.yaml" />
   </node>
   <node pkg="rviz" name="rviz" type="rviz" args="-d $(find lidar_camera_calibration)/rviz/data_generate.rviz" />
 </launch>

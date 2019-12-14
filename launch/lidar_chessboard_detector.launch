@@ -1,24 +1,6 @@
 <launch>
   <node pkg="lidar_camera_calibration" type="lidar_chessboard_detector" name="lidar_chessboard_detector" output="screen">
-    <param name="button_command_topic" type="str" value="/lidar_camera_calibration/button_command" />
-    <param name="raw_cloud_topic" type="str" value="/lidar_camera_calibration/raw_point_cloud" />
-    <param name="candidate_cloud_topic" type="str" value="/lidar_camera_calibration/candidate_point_cloud" />
-    <param name="chessboard_cloud_topic" type="str" value="/lidar_camera_calibration/chessboard_point_cloud" />
-    <param name="raw_cloud_path" type="str" value="$(find lidar_camera_calibration)/point_gray/cloud/" />
-    <param name="data_path" type="str" value="$(find lidar_camera_calibration)/data/" />
-    <param name="frame_id" type="str" value="pandar" />
-    <param name="min_height" type="double" value="-1.7" />
-    <param name="max_height" type="double" value="1.0" />
-    <param name="min_angle" type="double" value="240.0" />
-    <param name="max_angle" type="double" value="300.0" />
-    <param name="min_range" type="double" value="2.0" />
-    <param name="max_range" type="double" value="5.0" />
-    <param name="max_iterations" type="int" value="100" />
-    <param name="max_outlier_distance" type="double" value="0.02" />
-    <param name="cluster_tolerance" type="double" value="0.2" />
-    <param name="min_cluster_size" type="int" value="10" />
-    <param name="max_cluster_size" type="int" value="5000" />
-    <param name="chessboard_points_number" type="int" value="100" />
+    <rosparam command="load" file="$(find lidar_camera_calibration)/param/parameters.yaml" />
   </node>
   <node pkg="rqt_reconfigure" name="rqt_reconfigure" type="rqt_reconfigure" />
   <node pkg="rviz" name="rviz" type="rviz" args="-d $(find lidar_camera_calibration)/rviz/lidar_chessboard_detector.rviz" />

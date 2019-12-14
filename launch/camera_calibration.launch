@@ -1,5 +1,5 @@
 <launch>
   <node pkg="lidar_camera_calibration" type="camera_calibration" name="camera_calibration" output="screen">
-    <param name="data_path" type="str" value="$(find lidar_camera_calibration)/data/" />
+    <rosparam command="load" file="$(find lidar_camera_calibration)/param/parameters.yaml" />
   </node>
 </launch>

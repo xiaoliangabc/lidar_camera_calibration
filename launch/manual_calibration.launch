@@ -1,14 +1,6 @@
 <launch>
   <node pkg="lidar_camera_calibration" type="manual_calibration" name="manual_calibration" output="screen">
-    <param name="in_cloud_topic" type="str" value="/driver/pandar/point_cloud" />
-    <param name="in_image_topic" type="str" value="/camera/image_color" />
-    <param name="out_image_topic" type="str" value="/lidar_camera_calibration/projected_image" />
-    <param name="out_cloud_topic" type="str" value="/lidar_camera_calibration/in_image_cloud" />
-    <param name="data_path" type="str" value="$(find lidar_camera_calibration)/data/" />
-    <param name="min_theta" type="double" value="240.0" />
-    <param name="max_theta" type="double" value="300.0" />
-    <param name="min_range" type="double" value="2.0" />
-    <param name="max_range" type="double" value="100.0" />
+    <rosparam command="load" file="$(find lidar_camera_calibration)/param/parameters.yaml" />
   </node>
   <node pkg="rqt_reconfigure" name="rqt_reconfigure" type="rqt_reconfigure" />
   <node pkg="rviz" name="rviz" type="rviz" args="-d $(find lidar_camera_calibration)/rviz/manual_calibration.rviz" />

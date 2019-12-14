@@ -2,15 +2,17 @@
 
 ManualCalibration::ManualCalibration(ros::NodeHandle nh, ros::NodeHandle pnh)
     : nh_(nh), pnh_(pnh) {
-  pnh_.param<std::string>("in_cloud_topic", in_cloud_topic_, "");
-  pnh_.param<std::string>("in_image_topic", in_image_topic_, "");
-  pnh_.param<std::string>("out_image_topic", out_image_topic_, "");
-  pnh_.param<std::string>("out_cloud_topic", out_cloud_topic_, "");
-  pnh_.param<std::string>("data_path", data_path_, "");
-  pnh_.param<double>("min_angle", min_angle_, 240.0);
-  pnh_.param<double>("max_angle", max_angle_, 300.0);
-  pnh_.param<double>("min_range", min_range_, 2.0);
-  pnh_.param<double>("max_range", max_range_, 100.0);
+  pnh_.param<std::string>("common/point_cloud_topic", in_cloud_topic_, "");
+  pnh_.param<std::string>("common/image_topic", in_image_topic_, "");
+  pnh_.param<std::string>("manual_calibration/out_image_topic",
+                          out_image_topic_, "");
+  pnh_.param<std::string>("manual_calibration/out_cloud_topic",
+                          out_cloud_topic_, "");
+  pnh_.param<std::string>("common/data_path", data_path_, "");
+  pnh_.param<double>("common/min_angle", min_angle_, 240.0);
+  pnh_.param<double>("common/max_angle", max_angle_, 300.0);
+  pnh_.param<double>("common/min_range", min_range_, 2.0);
+  pnh_.param<double>("common/max_range", max_range_, 100.0);
 
   // Read calibration parameters from file
   ReadCalibrationResults();

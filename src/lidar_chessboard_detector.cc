@@ -3,26 +3,36 @@
 LidarChessboardDetector::LidarChessboardDetector(ros::NodeHandle nh,
                                                  ros::NodeHandle pnh)
     : nh_(nh), pnh_(pnh) {
-  pnh_.param<std::string>("button_command_topic", button_command_topic_, "");
-  pnh_.param<std::string>("raw_cloud_topic", raw_cloud_topic_, "");
-  pnh_.param<std::string>("candidate_cloud_topic", candidate_cloud_topic_, "");
-  pnh_.param<std::string>("chessboard_cloud_topic", chessboard_cloud_topic_,
+  pnh_.param<std::string>("common/button_command_topic", button_command_topic_,
                           "");
-  pnh_.param<std::string>("frame_id", frame_id_, "");
-  pnh_.param<std::string>("data_path", data_path_, "");
-  pnh_.param<double>("min_height", min_height_, 0.0);
-  pnh_.param<double>("max_height", max_height_, 0.0);
-  pnh_.param<double>("min_angle", min_angle_, 0.0);
-  pnh_.param<double>("max_angle", max_angle_, 0.0);
-  pnh_.param<double>("min_range", min_range_, 0.0);
-  pnh_.param<double>("max_range", max_range_, 0.0);
-  pnh_.param<int>("max_iterations", max_iterations_, 0);
-  pnh_.param<double>("max_outlier_distance", max_outlier_distance_, 0.0);
-  pnh_.param<double>("cluster_tolerance", cluster_tolerance_, 0.0);
-  pnh_.param<int>("min_cluster_size", min_cluster_size_, 0);
-  pnh_.param<int>("max_cluster_size", max_cluster_size_, 0);
-  pnh_.param<int>("max_cluster_size", max_cluster_size_, 0);
-  pnh_.param<int>("chessboard_points_number", chessboard_points_number_, 0);
+  pnh_.param<std::string>("lidar_chessboard_detector/raw_cloud_topic",
+                          raw_cloud_topic_, "");
+  pnh_.param<std::string>("lidar_chessboard_detector/candidate_cloud_topic",
+                          candidate_cloud_topic_, "");
+  pnh_.param<std::string>("lidar_chessboard_detector/chessboard_cloud_topic",
+                          chessboard_cloud_topic_, "");
+  pnh_.param<std::string>("common/frame_id", frame_id_, "");
+  pnh_.param<std::string>("common/data_path", data_path_, "");
+  pnh_.param<double>("lidar_chessboard_detector/min_height", min_height_, 0.0);
+  pnh_.param<double>("lidar_chessboard_detector/max_height", max_height_, 0.0);
+  pnh_.param<double>("lidar_chessboard_detector/min_angle", min_angle_, 0.0);
+  pnh_.param<double>("lidar_chessboard_detector/max_angle", max_angle_, 0.0);
+  pnh_.param<double>("lidar_chessboard_detector/min_range", min_range_, 0.0);
+  pnh_.param<double>("lidar_chessboard_detector/max_range", max_range_, 0.0);
+  pnh_.param<int>("lidar_chessboard_detector/max_iterations", max_iterations_,
+                  0);
+  pnh_.param<double>("lidar_chessboard_detector/max_outlier_distance",
+                     max_outlier_distance_, 0.0);
+  pnh_.param<double>("lidar_chessboard_detector/cluster_tolerance",
+                     cluster_tolerance_, 0.0);
+  pnh_.param<int>("lidar_chessboard_detector/min_cluster_size",
+                  min_cluster_size_, 0);
+  pnh_.param<int>("lidar_chessboard_detector/max_cluster_size",
+                  max_cluster_size_, 0);
+  pnh_.param<int>("lidar_chessboard_detector/max_cluster_size",
+                  max_cluster_size_, 0);
+  pnh_.param<int>("common/lidar_chessboard_points_number",
+                  chessboard_points_number_, 0);
 
   // Clear data
   button_command_.clear();

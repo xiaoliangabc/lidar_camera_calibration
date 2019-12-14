@@ -3,6 +3,5 @@
 *.png
 *.jpg
 *.xyz
-*.mat
-*.m
 *.txt
+*.bag

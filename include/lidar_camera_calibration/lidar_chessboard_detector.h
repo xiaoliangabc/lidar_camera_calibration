@@ -99,7 +99,7 @@ class LidarChessboardDetector {
   // Chessboard points number
   int chessboard_points_number_;
 
-  // detecting flag(mutex)
+  // Detecting flag(mutex)
   bool is_detecting_;
 
   // Detect chessboard

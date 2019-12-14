@@ -325,6 +325,7 @@ void LidarCameraCalibration::SaveCalibrationResult(
   }
   result_file << camera_params_file.rdbuf();
 
+  // Close all files
   camera_params_file.close();
   result_file.close();
 

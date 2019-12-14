@@ -1,4 +1,4 @@
-# Lidar camera calibration based on ROS and matlab
+# Lidar camera calibration based on ROS and MATLAB
 This package is used to calibrate LiDAR and camera using a chessboard which is commonly used in camera intrinsic calibration. The main idea is inspired by the [Laser-Camera Calibration Toolbox](http://www.cs.cmu.edu/~ranjith/lcct.html) developed by Ranjith. So far, there has the following main features
 - [x] Generate calibration data online or from a ROS bag offline ([src/data_generate.cc](src/data_generate.cc))
 - [x] Camera calibration using MATLAB or MATLAB runtime ([src/camera_calibration.cc](src/camera_calibration.cc) or [matlab/camera_calibration.m](matlab/camera_calibration.m))
@@ -17,7 +17,7 @@ Note that, if you choose to use MATLAB, please refer to [matlab/camera_calibrati
 ### Installation
 ```bash
 cd ros_workspace/src
-git@github.com:xiaoliangabc/lidar_camera_calibration.git
+git clone git@github.com:xiaoliangabc/lidar_camera_calibration.git
 ```
 
 ### Build

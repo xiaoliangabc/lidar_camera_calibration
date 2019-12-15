@@ -1,6 +1,9 @@
-.vscode/*
+.vscode
+axis
+backups
+point_gray
 *.pcd
 *.jpg
-*.xyz
 *.txt
 *.bag
+*.zip

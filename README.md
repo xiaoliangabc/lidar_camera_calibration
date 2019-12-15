@@ -68,6 +68,45 @@ The camera calibration result will be write to `data/result/` folder, which cont
 - `camera_chessboard_model.txt`: which contains chessboard plane model for each image, the format is `index,rotation_x,rotation_y,rotation_z,translation_x,translation_y,translation_z`
 - `camera_chessboard_points.txt`: which contains the coordinates of each world point
 
+
+#### Detect Chessboard for LiDAR Point Cloud
+
+Run
+```
+roslaunch lidar_camera_calibration lidar_chessboard_detector.launch
+```
+Then `Rviz` and `rqt_reconfigure` will be launched simultaneously, the layout of `Rviz` is look like
+
+<img src=".images/lidar_chessboard_detect_rviz.png" width="100%">
+
+Note that
+- The white point cloud is the original point cloud collected by LiDAR
+- The green point cloud is the candidate point cloud used to detect chessboard
+- The red point cloud is the point cloud fall on the chessboard
+
+The layout of `rqt_reconfigure` is look like
+
+<img src=".images/lidar_chessboard_detect_rqt.png" width="80%">
+
+There are eleven parameters that can be fine-tuned
+- `min_height`: minimum heiht of candidate point cloud data used to detect chessboard (in units of 'meters')
+- `max_height`: maximum heiht of candidate point cloud data used to detect chessboard (in units of 'meters')
+- `min_angle`: minimum angle of candidate point cloud data used to detect chessboard (in units of 'degree')
+- `max_angle`: maximum angle of candidate point cloud data used to detect chessboard (in units of 'degree')
+- `min_range`: minimum range of candidate point cloud data used to detect chessboard (in units of 'meters')
+- `max_range`: maximum range of candidate point cloud data used to detect chessboard (in units of 'meters')
+- `max_iterations`: maximum iterations for RANSAC to fitting chessboard plane
+- `max_outlier_distance`: maximum outlier distance for RANSAC to fitting chessboard plane (in units of 'meters')
+- `cluster_tolerance`: euclidean cluster tolerance for finding maximum cluster (in units of 'meters')
+- `min_cluster_size`: minimum points size to be a cluster in euclidean cluster
+- `max_cluster_size`: maximum points size to be a cluster in euclidean cluster
+
+When a chessboard is successfully detected, click the **`Next`** button in `Rviz` to switch to the next frame, repeat until all chessboards have been detected successfully.
+
+The detect results will be writen to `data/result` folder, which contains the following two files
+- `lidar_chessboard_model.txt`: which contains chessboard plane model for each point cloud, the format is `index,alpha_x,alpha_y,alpha_z,theta`
+- `lidar_chessboard_points.txt`: which contains the coordinates of each point falls on the chessboard , the format is `index,x,y,z`
+
 #### LiDAR Camera Automatic Calibration
 Run 
 ```
@@ -157,42 +196,7 @@ After generating calibration data successfully, you can see LiDAR data in folder
 This is the same as [Camera Calibration](#Camera-Calibration) in [Calibration Using Example Data](#Calibration-Using-Example-Data)
 
 #### Detect Chessboard for LiDAR Point Cloud
-
-Run
-```
-roslaunch lidar_camera_calibration lidar_chessboard_detector.launch
-```
-Then `Rviz` and `rqt_reconfigure` will be launched simultaneously, the layout of `Rviz` is look like
-
-<img src=".images/lidar_chessboard_detect_rviz.png" width="100%">
-
-Note that
-- The white point cloud is the original point cloud collected by LiDAR
-- The green point cloud is the candidate point cloud used to detect chessboard
-- The red point cloud is the point cloud fall on the chessboard
-
-The layout of `rqt_reconfigure` is look like
-
-<img src=".images/lidar_chessboard_detect_rqt.png" width="80%">
-
-There are eleven parameters that can be fine-tuned
-- `min_height`: minimum heiht of candidate point cloud data used to detect chessboard (in units of 'meters')
-- `max_height`: maximum heiht of candidate point cloud data used to detect chessboard (in units of 'meters')
-- `min_angle`: minimum angle of candidate point cloud data used to detect chessboard (in units of 'degree')
-- `max_angle`: maximum angle of candidate point cloud data used to detect chessboard (in units of 'degree')
-- `min_range`: minimum range of candidate point cloud data used to detect chessboard (in units of 'meters')
-- `max_range`: maximum range of candidate point cloud data used to detect chessboard (in units of 'meters')
-- `max_iterations`: maximum iterations for RANSAC to fitting chessboard plane
-- `max_outlier_distance`: maximum outlier distance for RANSAC to fitting chessboard plane (in units of 'meters')
-- `cluster_tolerance`: euclidean cluster tolerance for finding maximum cluster (in units of 'meters')
-- `min_cluster_size`: minimum points size to be a cluster in euclidean cluster
-- `max_cluster_size`: maximum points size to be a cluster in euclidean cluster
-
-When a chessboard is successfully detected, click the **`Next`** button in `Rviz` to switch to the next frame, repeat until all chessboards have been detected successfully.
-
-The detect results will be writen to `common/data_path/result` folder, which contains the following two files
-- `lidar_chessboard_model.txt`: which contains chessboard plane model for each point cloud, the format is `index,alpha_x,alpha_y,alpha_z,theta`
-- `lidar_chessboard_points.txt`: which contains the coordinates of each point falls on the chessboard , the format is `index,x,y,z`
+This is the same as [Detect Chessboard for LiDAR Point Cloud](#Detect-Chessboard-for-LiDAR-Point-Cloud) in [Calibration Using Example Data](#Calibration-Using-Example-Data)
 
 #### LiDAR Camera Automatic Calibration
 This is the same as [LiDAR Camera Automatic Calibration](#LiDAR-Camera-Automatic-Calibration) in [Calibration Using Example Data](#Calibration-Using-Example-Data)
